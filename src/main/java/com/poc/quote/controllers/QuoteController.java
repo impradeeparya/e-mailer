@@ -20,6 +20,7 @@ public class QuoteController {
   @Autowired
   private QuoteSvc quoteSvc;
 
+  @CrossOrigin(origins = "http://13.58.134.65:8080")
   @PostMapping(value = "/send/{type}", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity postQuote(@PathVariable("type") FileType fileType,
