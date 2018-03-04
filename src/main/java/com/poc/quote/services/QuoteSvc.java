@@ -1,20 +1,23 @@
-package com.poc.fileoperation.services;
+package com.poc.quote.services;
+
+import static com.poc.quote.constants.Constants.*;
 
 import com.itextpdf.text.DocumentException;
-import static com.poc.fileoperation.Constants.*;
-import com.poc.fileoperation.dto.UserInfo;
-import com.poc.fileoperation.enums.FileType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Service;
+import com.poc.quote.dto.QuoteInfo;
+import com.poc.quote.enums.FileType;
 
-import javax.mail.MessagingException;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+
 @Service
-public class FileSvc {
+public class QuoteSvc {
 
 
   @Autowired
@@ -26,18 +29,18 @@ public class FileSvc {
   @Autowired
   private Environment environment;
 
-  public void sendFile(FileType fileType, UserInfo userInfo)
+  public void sendFile(FileType fileType, QuoteInfo quoteInfo)
       throws DocumentException, MessagingException {
-    System.out.println(fileType + " " + userInfo);
+    System.out.println(fileType + " " + quoteInfo);
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    fileGenerator.writeToOutputStream(outputStream, userInfo.toMap());
+    fileGenerator.writeToOutputStream(outputStream, quoteInfo.toMap());
     Map<String, Object> mailData = new HashMap<>();
     mailData.put(TO, environment.getProperty("to"));
     mailData.put(FROM, environment.getProperty("from"));
     mailData.put(ATTACHMENT, outputStream.toByteArray());
     mailData.put(ATTACHMENT_TYPE, "application/pdf");
-    mailData.put(ATTACHMENT_NAME, "user_info.pdf");
-    mailData.put(SUBJECT, "This is subject");
+    mailData.put(ATTACHMENT_NAME, "quote_info.pdf");
+    mailData.put(SUBJECT, "QUOTE REQUIRED");
     mailer.sendMultipart(mailData);
   }
 }

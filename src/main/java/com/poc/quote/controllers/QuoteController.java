@@ -1,30 +1,31 @@
-package com.poc.fileoperation.controllers;
+package com.poc.quote.controllers;
 
 import com.itextpdf.text.DocumentException;
-import com.poc.fileoperation.dto.UserInfo;
-import com.poc.fileoperation.enums.FileType;
-import com.poc.fileoperation.services.FileSvc;
+import com.poc.quote.dto.QuoteInfo;
+import com.poc.quote.enums.FileType;
+import com.poc.quote.services.QuoteSvc;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
-
 @RestController
-@RequestMapping("/file")
-public class FileController {
+@RequestMapping("/quote")
+public class QuoteController {
 
   @Autowired
-  private FileSvc fileSvc;
+  private QuoteSvc quoteSvc;
 
   @PostMapping(value = "/send/{type}", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity createFile(@PathVariable("type") FileType fileType,
-      @RequestBody UserInfo userInfo) throws DocumentException, MessagingException {
+  public ResponseEntity postQuote(@PathVariable("type") FileType fileType,
+      @RequestBody QuoteInfo quoteInfo) throws DocumentException, MessagingException {
     ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
-    fileSvc.sendFile(fileType, userInfo);
+    quoteSvc.sendFile(fileType, quoteInfo);
     return responseEntity;
   }
 }

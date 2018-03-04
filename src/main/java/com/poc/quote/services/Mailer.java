@@ -1,6 +1,6 @@
-package com.poc.fileoperation.services;
+package com.poc.quote.services;
 
-import static com.poc.fileoperation.Constants.*;
+import static com.poc.quote.constants.Constants.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

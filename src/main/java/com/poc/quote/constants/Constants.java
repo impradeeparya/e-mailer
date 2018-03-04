@@ -1,4 +1,4 @@
-package com.poc.fileoperation;
+package com.poc.quote.constants;
 
 public interface Constants {
 
