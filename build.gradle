@@ -13,7 +13,7 @@ buildscript {
 * create war file
 * default it will create jar
 * */
-apply plugin: 'war'
+//apply plugin: 'war'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -29,7 +29,7 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web') {
-        exclude module: 'spring-boot-starter-tomcat'
+//        exclude module: 'spring-boot-starter-tomcat'
     }
     compile('org.springframework.boot:spring-boot-devtools')
     compile('com.itextpdf:itextpdf:5.5.13')
