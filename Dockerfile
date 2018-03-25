@@ -12,5 +12,5 @@ RUN \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /var/cache/oracle-jdk8-installer
 COPY build/libs/e-mailer-0.0.1.jar /home/
-RUN cd /home && ls -ltr
-CMD java -jar e-mailer-0.0.1.jar
+RUN ls -ltr /home/
+CMD java -jar /home/e-mailer-0.0.1.jar
